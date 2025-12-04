@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>weatherapp</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+</head>
+
+<body id="body">
+  <header class="header-container">
+    <div class="container d-flex justify-content-between py-5">
+      <a href="#" class="navbar-brand">
+        <img src="/public/assets/images/logo.svg" style="width: 80%" alt="logo" />
+      </a>
+      <div class="units-container">
+        <div class="dropdown">
+          <button class="btn bg-neutral-700 clr-neutral-0 dropdown-toggle align-items-center d-flex gap-2" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/public/assets/images/icon-units.svg" alt="" />
+            <span>Units</span>
+          </button>
+          <ul class="dropdown-menu bg-neutral-800 clr-neutral-0 dropdown-menu-end" style="width: 200px;">
+            <button class="dropdown-item btn clr-neutral-0 w-100 focus" onclick="switchBtn()" style="padding: 6px 10px">
+              Switch to <span id="unitType">Imperial</span>
+            </button>
+            <div class="unitConverter">
+              <div class="temp">
+                <h4 style="padding: 8px 10px" class="fs-100 clr-neutral-0 w-100 m-0 opacity-50">
+                  Temperature
+                </h4>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 d-flex align-items-center justify-content-between"
+                    style="padding: 6px 10px"><span>Celcius (&deg;C) </span>
+                    <img src="/public/assets/images/icon-checkmark.svg" alt="" class="metric-check" /></span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 d-flex align-items-center justify-content-between"
+                    style="padding: 6px 10px"><span>Farenheit (&deg;F) </span>
+                    <img src="/public/assets/images/icon-checkmark.svg" alt="" class="imperial-check" /></span>
+                </li>
+              </div>
+              <hr class="p-0 m-2" style="opacity: 0.1" />
+              <div class="temp">
+                <h4 style="padding: 8px 10px" class="fs-100 clr-neutral-0 w-100 m-0 opacity-50">
+                  Wind Speed
+                </h4>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 d-flex align-items-center justify-content-between"
+                    style="padding: 6px 10px"><span>km/h</span>
+                    <img src="/public/assets/images/icon-checkmark.svg" alt="" class="metric-check" /></span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 d-flex align-items-center justify-content-between"
+                    style="padding: 6px 10px"><span>mph</span>
+                    <img src="/public/assets/images/icon-checkmark.svg" alt="" class="imperial-check" /></span>
+                </li>
+              </div>
+              <hr class="p-0 m-2" style="opacity: 0.1" />
+              <div class="temp">
+                <h4 style="padding: 8px 10px" class="fs-100 clr-neutral-0 w-100 m-0 opacity-50">
+                  Precipitation
+                </h4>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 d-flex align-items-center justify-content-between"
+                    style="padding: 6px 10px"><span>Millimeters (mm)</span>
+                    <img src="/public/assets/images/icon-checkmark.svg" alt="" class="metric-check" /></span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 d-flex align-items-center justify-content-between"
+                    style="padding: 6px 10px"><span>Inches (in) </span>
+                    <img src="/public/assets/images/icon-checkmark.svg" alt="" class="imperial-check" /></span>
+                </li>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="container" id="searchContainer">
+      <div class="text-center">
+        <h1 class="ff-secondary fs-800 mb-5 text-center mx-auto" style="width: 80%">
+          How's the sky looking today?
+        </h1>
+        <div class="search-bar d-flex justify-content-between gap-3">
+          <div class="search-wrapper dropdown">
+            <i class="fa fa-search search-icon">
+              <title>Search</title>
+            </i>
+
+            <input type="search" name="" id="searchBar" data-bs-toggle="dropdown" aria-expanded="false"
+              class="w-100 rounded-3" list="cities" placeholder="Search for a place..." />
+            <ul class="dropdown-menu bg-neutral-800 clr-neutral-0 dropdown-menu-center w-100" id="searchInProgess">
+              <li>
+                <span class="dropdown-item city-name clr-neutral-0 w-100">Berlin</span>
+              </li>
+              <li>
+                <span class="dropdown-item city-name clr-neutral-0 w-100">Lagos</span>
+              </li>
+              <li>
+                <span class="dropdown-item city-name clr-neutral-0 w-100">Beirut</span>
+              </li>
+              <li>
+                <span class="dropdown-item city-name clr-neutral-0 w-100">Sofia</span>
+              </li>
+              <li>
+                <span class="dropdown-item city-name clr-neutral-0 w-100">Copenhagen</span>
+              </li>
+            </ul>
+          </div>
+          <button class="btn bg-blue-700 clr-neutral-0 fs-300 rounded-3" style="padding: 0.7rem 1rem" id="searchButton"
+            type="submit">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <section>
+      <div class="container mb-5 mt-xl-5 weather-split d-flex flex-column flex-xl-row gap-5">
+        <div class="daily-split">
+          <div>
+            <div class="image-wrapper mt-5 mb-5 mt-xl-0" id="imageWrapper">
+              <div
+                class="loading-overlay d-flex justify-content-center align-items-center bg-neutral-800 gap-3 rounded-4"
+                style="display: none !important;">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <span class="fs-500">Loading</span>
+              </div>
+              <div class="today-image small">
+                <img src="/public/assets/images/bg-today-small.svg" alt="today's Image" />
+              </div>
+              <div class="today-image large">
+                <img src="/public/assets/images/bg-today-large.svg" alt="today's Image" />
+              </div>
+              <div class="text-wrapper d-flex w-100">
+                <div class="top-wrapper text-md-start" style="width: 70%">
+                  <h3 class="fw-semibold city-name">Berlin, Germany</h3>
+                  <h4 class="fs-200 fw-light date-field mt-2">
+                    Tuesday, Aug 5, 2025
+                  </h4>
+                </div>
+
+                <span class="d-flex justify-content-between align-items-center mx-auto bottom-wrapper"
+                  style="width: 85%">
+                  <img src="/public/assets/images/icon-sunny.webp" style="width: 150px" alt="weathericon"
+                    id="weatherIcon" />
+                  <span>
+                    <h1 class="fw-semiboldI fs-1000 m-0" id="currentWeather">
+                      20&deg;
+                    </h1>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="d-grid gap-3 fw weather-desc" style="grid-template-columns: 1fr 1fr">
+              <div class="p-3 rounded-3 bg-neutral-800" style="border: 1px solid #8d8d8d4d">
+                <h4 class="fs-200 m-0 fw-light">Feels Like</h4>
+                <br />
+                <h2 class="m-0 fw-light" id="feelsLikeTemp">18&deg;</h2>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800" style="border: 1px solid #8d8d8d4d">
+                <h4 class="fs-200 m-0 fw-light">Humidity</h4>
+                <br />
+                <h2 class="m-0 fw-light" id="humidityValue">64%</h2>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800" style="border: 1px solid #8d8d8d4d">
+                <h4 class="fs-200 m-0 fw-light">Wind</h4>
+                <br />
+                <h2 class="m-0 fw-light" id="windValue">14 km/h</h2>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800" style="border: 1px solid #8d8d8d4d">
+                <h4 class="fs-200 m-0 fw-light">Precipitation</h4>
+                <br />
+                <h2 class="m-0 fw-light" id="precipitationValue">0 mm</h2>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <h3 class="fs-300 mb-3">Daily forecast</h3>
+            <div class="d-grid gap-3 daily-forecast" style="grid-template-columns: 1fr 1fr 1fr">
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Tue</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Wed</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Thur</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Fri</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Sat</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Sun</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+              <div class="p-3 rounded-3 bg-neutral-800 text-center"
+                style="border: 1px solid #8d8d8d4d; min-height: 162px">
+                <div class="dailyContainer">
+                  <h4 class="fw-light fs-200 m-0 dailyDay">Mon</h4>
+                  <img src="/public/assets/images/icon-overcast.webp" alt="" class="w-75 mx-auto py-3 weatherIcon" />
+                  <span class="d-flex justify-content-between">
+                    <h4 class="fw-light fs-200 m-0 highTemp">24&deg;</h4>
+                    <h4 class="fw-light fs-200 m-0 lowTemp">12&deg;</h4>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-neutral-800 p-3 rounded-4 hour-split">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="fs-200">Hourly Forecast</h4>
+            <div class="dropdown">
+              <button class="btn bg-neutral-700 clr-neutral-0 dropdown-toggle align-items-center d-flex gap-2"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false" id="weekdayName">
+                Select Day
+              </button>
+              <ul class="dropdown-menu bg-neutral-800 clr-neutral-0 dropdown-menu-end">
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Monday</span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Tuesday</span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Wednesday</span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Thursday</span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Friday</span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Saturday</span>
+                </li>
+                <li>
+                  <span class="dropdown-item clr-neutral-0 w-100 weekday">Sunday</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="pt-3 d-grid gap-3 hourly-forecast">
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">1PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">2PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">3PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">4PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">5PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">6PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">7PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center p-2 bg-neutral-700 rounded-3 hourlyContainer"
+              style="
+                  height: 65px;
+                  border: 1px solid rgba(116, 116, 116, 0.3);
+                  border: 1px solid rgba(116, 116, 116, 0.2);
+                ">
+              <div style="flex: 1" class="d-flex gap-3 align-items-center">
+                <img src="/public/assets/images/icon-partly-cloudy.webp" alt="weather icon" style="width: 50px"
+                  class="weatherIcon" />
+                <h2 class="m-0 fs-400 hourlyTime">8PM</h2>
+              </div>
+              <span>
+                <h4 class="fs-300 m-0 hourlyForecast">14&deg;</h4>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://kit.fontawesome.com/67f27d13ea.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+
+</html>
