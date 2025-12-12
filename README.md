@@ -58,7 +58,7 @@ Users should be able to:
 
 
 ### What I learned
-A lotttttt!  
+A lot!  
 
 ### Continued development
 Hopefully get a hang of state management better
