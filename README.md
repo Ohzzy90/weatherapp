@@ -41,7 +41,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: https://github.com/Ohzzy90/weatherapp
-- Live Site URL: https://openweathertestapp.netlify.app
+- Live Site URL: https://openweatherapptest.netlify.app
 
 ## My process
 
